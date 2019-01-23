@@ -737,7 +737,7 @@ public class InterpreterTest extends TestCase {
                   // Calculate the name of the dynamic partial
                   StringWriter sw = new StringWriter();
                   partial.execute(sw, scopes);
-                  Mustache mustache = dynamicaPartialCache.computeIfAbsent(sw.toString(), df::compilePartial);
+                  Mustache mustache = dynamicaPartialCache.computeIfAbsent(sw.toString(), a -> df.compilePartial(a, null, null));
                   Writer execute = mustache.execute(writer, scopes);
                   return appendText(execute);
                 }

@@ -233,7 +233,7 @@ public class DefaultMustacheFactory implements MustacheFactory {
    * @param s the name of the partial to compile
    * @return the compiled partial
    */
-  public Mustache compilePartial(String s) {
+  public Mustache compilePartial(String s, String sm, String em) {
     final Map<String, Mustache> cache = partialCache.get();
     final Mustache cached = cache.get(s);
     if (cached != null) {
@@ -245,7 +245,13 @@ public class DefaultMustacheFactory implements MustacheFactory {
       return cached;
     }
     try {
-      final Mustache mustache = mc.compile(s);
+      final Mustache mustache;
+      if (sm != null && em != null) {
+        mustache = mc.compile(s, sm, em);
+      } else  {
+        mustache = mc.compile(s);
+      }
+      
       cache.put(s, mustache);
       mustache.init();
       return mustache;

@@ -30,6 +30,14 @@ public class MustacheParser {
     return compile(reader, file);
   }
 
+  public Mustache compile(String file, String sm, String em) {
+    Reader reader = mf.getReader(file);
+    if (reader == null) {
+      throw new MustacheNotFoundException(file);
+    }
+    return compile(reader, file, sm, em);
+  }
+
   public Mustache compile(Reader reader, String file) {
     return compile(reader, file, DEFAULT_SM, DEFAULT_EM);
   }

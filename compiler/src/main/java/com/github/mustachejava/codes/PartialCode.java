@@ -78,7 +78,7 @@ public class PartialCode extends DefaultCode {
   @Override
   public synchronized void init() {
     filterText();
-    partial = df.compilePartial(partialName());
+    partial = df.compilePartial(partialName(), tc.startChars(), tc.endChars());
     if (partial instanceof DefaultMustache && ((DefaultMustache)partial).isRecursive()) {
       isRecursive = true;
     }
